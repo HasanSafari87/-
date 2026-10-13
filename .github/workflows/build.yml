@@ -16,6 +16,9 @@ jobs:
           unzip -o QazaNamazAndroid.zip -d extracted
           cp -R extracted/. .
           rm -rf extracted
+                - name: Fix Java and Kotlin targets
+        run: |
+          sed -i '/^android {/a\    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }\n    kotlinOptions { jvmTarget = "17" }' app/build.gradle
 
       - uses: actions/setup-java@v4
         with:
